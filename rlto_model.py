@@ -1,14 +1,32 @@
-from __future__ import annotations
-
-from matplotlib import pyplot as plt
-
 """
 Cancer-adapted RLTO-inspired model.
 
 This module implements a practical Python framework inspired by the
 robustness-load trade-off (RLTO) model described in Choi et al.
 (Science Advances, 2026), but reframed for cancer systems biology.
+
+What is retained from the paper:
+- A threshold-like fitness landscape with respect to effective protein abundance.
+- Overabundance defined as o = C0 / CA, where C0 is baseline abundance and
+  CA is the critical abundance threshold.
+- The qualitative prediction that lower-expression essential genes tend to need
+  larger overabundance to maintain robustness.
+
+What is adapted for cancer:
+- Fitness is tumor-cell proliferation instead of bacterial growth.
+- Gene dosage, clone fraction, microenvironment stress, and oncogenic pressure
+  are included explicitly.
+- Toxicity and pathway-specific burden are modeled directly.
+- The implementation is intended for simulation, sensitivity analysis,
+  and optimization on bulk or single-cell omics inputs.
+
+This is a principled engineering implementation, not a verbatim recovery of the
+paper's full supplementary mathematics.
 """
+
+from __future__ import annotations
+
+from matplotlib import pyplot as plt
 
 from dataclasses import dataclass, asdict, fields
 from typing import Dict, Optional, Sequence, Tuple
@@ -113,7 +131,7 @@ class CancerRLTOModel:
             base_proliferation: float = 1.0,
             burden_global: float = 1.0,
             toxicity_global: float = 1.0,
-            robustness_scale: float = 5.0,
+            robustness_scale: float = 10.0,
             random_seed: Optional[int] = 42,
     ) -> None:
         self.genes = list(genes)
@@ -299,16 +317,31 @@ class CancerRLTOModel:
     # -------------------------------------------------------------------------
     # LAYER 2: Tumor-Level Global Optimization
     # -------------------------------------------------------------------------
-    def optimize_global(self, n_samples: int = 5000) -> Tuple[np.ndarray, float]:
-        """Finds the optimal abundance vector across all genes simultaneously."""
+    def optimize_global(self, n_samples: int = 0, global_resource_weight: float = 0.5) -> Tuple[np.ndarray, float]:
+        """Finds the optimal abundance vector across all genes simultaneously, enforcing carrying capacity."""
         x0 = np.array([self.expected_abundance(g) for g in self.genes])
+        baseline_total = float(np.sum(x0))
 
         def objective(x):
+            # 1. Base fitness: mean of individual gene net fitnesses
             vals = [
-                self.net_gene_fitness(g, mean_abundance=float(xi), n_samples=n_samples).net_fitness
+                self.net_gene_fitness(g, mean_abundance=float(xi)).net_fitness
                 for g, xi in zip(self.genes, x)
             ]
-            return -np.mean(vals)
+            mean_fitness = np.mean(vals)
+
+            # 2. Global carrying capacity penalty
+            # Superlinear penalty based on the total protein burden across ALL genes
+            total_abundance = np.sum(x)
+
+            # Normalize by baseline total to scale the penalty correctly
+            normalized_total = total_abundance / max(baseline_total, 1.0)
+
+            # Quadratic penalty forces a hard trade-off: you cannot maximize all genes at once
+            resource_penalty = global_resource_weight * (normalized_total ** 2)
+
+            # Minimize negative fitness
+            return -(mean_fitness - resource_penalty)
 
         bounds = [(1e-6, xi * 20.0) for xi in x0]
 
@@ -316,7 +349,7 @@ class CancerRLTOModel:
             objective,
             x0,
             bounds=bounds,
-            method="L-BFGS-B"
+            method="SLSQP"
         )
         return res.x, -res.fun
 
@@ -412,11 +445,62 @@ class CancerRLTOModel:
 
     @staticmethod
     def demo_dataset() -> pd.DataFrame:
+        """
+        A comprehensive synthetic dataset designed to stress-test the bounds,
+        edge cases, and trade-offs of the Cancer RLTO model.
+        """
         return pd.DataFrame([
+            # -------------------------------------------------------------------------
+            # 1. THE ANCHORS (Typical behavior, smooth curves)
+            # -------------------------------------------------------------------------
             {"gene": "MYC", "transcription_rate": 8.0, "essentiality_weight": 0.8, "burden_weight": 0.015,
              "toxicity_weight": 0.020, "pathway": "proliferation"},
             {"gene": "KRAS", "transcription_rate": 5.5, "essentiality_weight": 0.9, "burden_weight": 0.012,
              "toxicity_weight": 0.015, "pathway": "MAPK"},
+
+            # -------------------------------------------------------------------------
+            # 2. THE EXTREME EDGE CASES (Testing zeros and boundaries)
+            # -------------------------------------------------------------------------
+            # The "Useless Passenger": Zero essentiality. Net fitness should be negative.
+            {"gene": "PASSENGER", "transcription_rate": 2.0, "essentiality_weight": 0.0, "burden_weight": 0.01,
+             "toxicity_weight": 0.01, "pathway": "none"},
+
+            # The "Free Lunch": Zero toxicity and burden. Tests if the optimizer pushes to the absolute upper bound (20x baseline).
+            {"gene": "MAGIC_BULLET", "transcription_rate": 3.0, "essentiality_weight": 1.0, "burden_weight": 0.0,
+             "toxicity_weight": 0.0, "pathway": "synthetic"},
+
+            # The "Micro-Subclone": Almost nonexistent clone fraction. Tests numerical stability at near-zero baseline abundances.
+            {"gene": "RARE_VAR", "transcription_rate": 5.0, "clone_fraction": 0.01, "essentiality_weight": 0.8,
+             "burden_weight": 0.01, "toxicity_weight": 0.01, "pathway": "subclonal"},
+
+            # -------------------------------------------------------------------------
+            # 3. NOISE AND REGULATION EXTREMES (Testing the Gamma distribution shape)
+            # -------------------------------------------------------------------------
+            # The "Chaos Engine": Massive burstiness, low regulation. Wide, flat Gamma distribution. Needs high overabundance to survive.
+            {"gene": "CHAOS_GENE", "transcription_rate": 2.0, "burstiness": 15.0, "regulation_strength": 0.0,
+             "essentiality_weight": 0.9, "burden_weight": 0.01, "toxicity_weight": 0.01, "pathway": "stress_response"},
+
+            # The "Perfect Housekeeper": Tiny burstiness, extreme regulation. Tight spike Gamma distribution. Should hover exactly on its threshold.
+            {"gene": "HOUSEKEEPER", "transcription_rate": 10.0, "burstiness": 0.1, "regulation_strength": 5.0,
+             "essentiality_weight": 1.0, "burden_weight": 0.02, "toxicity_weight": 0.005, "pathway": "metabolism"},
+
+            # -------------------------------------------------------------------------
+            # 4. TOXICITY AND BURDEN EXTREMES (Testing the penalty curves)
+            # -------------------------------------------------------------------------
+            # The "Lethal Driver": Cranking transcription beyond what the cell can handle, coupled with massive toxicity. Optimizer should squash it down.
+            {"gene": "TOXIC_DRIVER", "transcription_rate": 25.0, "oncogenic_boost": 2.0, "essentiality_weight": 0.5,
+             "burden_weight": 0.05, "toxicity_weight": 0.15, "pathway": "apoptosis"},
+
+            # The "Heavy Protein": No superlinear toxicity, but massive linear burden (e.g., massive structural protein).
+            {"gene": "STRUCTURAL", "transcription_rate": 15.0, "essentiality_weight": 0.9, "burden_weight": 0.1,
+             "toxicity_weight": 0.0, "pathway": "cytoskeleton"},
+
+            # -------------------------------------------------------------------------
+            # 5. MICROENVIRONMENT SENSITIVITY
+            # -------------------------------------------------------------------------
+            # The "Fragile Gene": Hyper-sensitive to stress. In a high-stress environment, its baseline will tank.
+            {"gene": "FRAGILE", "transcription_rate": 6.0, "stress_sensitivity": 0.9, "essentiality_weight": 0.85,
+             "burden_weight": 0.01, "toxicity_weight": 0.01, "pathway": "dna_repair"}
         ])
 
     def abundance_fitness_curve(self, gene: GeneConfig, abundance_grid: Optional[np.ndarray] = None,
@@ -439,6 +523,7 @@ class CancerRLTOModel:
                 "net_fitness": res.net_fitness,
             })
         return pd.DataFrame(rows)
+
 
 class ModelDiagnostics:
     """
@@ -561,33 +646,49 @@ class ModelDiagnostics:
         plt.tight_layout()
         return plt.gcf()
 
-    def plot_bivariate_landscape(self, gene1_name: str, gene2_name: str, grid_size: int = 20, n_samples: int = 2000):
+    def plot_bivariate_landscape(self, gene1_name: str, gene2_name: str, grid_size: int = 40, n_samples: int = 0):
         """4. Checks for infinite ridges or compensation in the 2D global landscape."""
         g1 = self._get_gene(gene1_name)
         g2 = self._get_gene(gene2_name)
 
-        b1 = self.model.expected_abundance(g1)
-        b2 = self.model.expected_abundance(g2)
+        # FIX: Find the actual peaks and center the grid around them!
+        opt1 = self.model.optimize_gene_abundance(g1)["optimal_abundance"]
+        opt2 = self.model.optimize_gene_abundance(g2)["optimal_abundance"]
 
-        x1_grid = np.linspace(b1 * 0.2, b1 * 3.0, grid_size)
-        x2_grid = np.linspace(b2 * 0.2, b2 * 3.0, grid_size)
+        # Keep the background genes fixed at baseline
+        bg_abundance = sum(
+            self.model.expected_abundance(g)
+            for g in self.model.genes
+            if g.gene not in (gene1_name, gene2_name)
+        )
+        baseline_total = bg_abundance + self.model.expected_abundance(g1) + self.model.expected_abundance(g2)
+
+        # Create a tight grid right around the peaks
+        x1_grid = np.linspace(opt1 * 0.2, opt1 * 2.5, grid_size)
+        x2_grid = np.linspace(opt2 * 0.2, opt2 * 2.5, grid_size)
 
         X1, X2 = np.meshgrid(x1_grid, x2_grid)
         Z = np.zeros_like(X1)
 
-        # Isolate the fitness to just these two genes for clear visualization
         for i in range(grid_size):
             for j in range(grid_size):
-                f1 = self.model.net_gene_fitness(g1, mean_abundance=float(X1[i, j]), n_samples=n_samples).net_fitness
-                f2 = self.model.net_gene_fitness(g2, mean_abundance=float(X2[i, j]), n_samples=n_samples).net_fitness
-                Z[i, j] = (f1 + f2) / 2.0
+                f1 = self.model.net_gene_fitness(g1, mean_abundance=float(X1[i, j])).net_fitness
+                f2 = self.model.net_gene_fitness(g2, mean_abundance=float(X2[i, j])).net_fitness
+
+                mean_fit = (f1 + f2) / 2.0
+
+                # Apply the global carrying capacity penalty
+                total_abundance = X1[i, j] + X2[i, j] + bg_abundance
+                normalized_total = total_abundance / max(baseline_total, 1.0)
+                resource_penalty = 0.5 * (normalized_total ** 2)
+
+                Z[i, j] = mean_fit - resource_penalty
 
         plt.figure(figsize=(7, 6))
-        cp = plt.contourf(X1, X2, Z, levels=30, cmap="viridis")
-        plt.colorbar(cp, label="Mean Net Fitness (Gene 1 & 2)")
+        cp = plt.contourf(X1, X2, Z, levels=40, cmap="viridis")
+        plt.colorbar(cp, label="Global Tumor Fitness (with Resource Limit)")
 
-        # Look for a closed bullseye. If it's a diagonal ridge, the system is underconstrained.
-        plt.contour(X1, X2, Z, levels=15, colors='black', alpha=0.5, linewidths=0.5)
+        plt.contour(X1, X2, Z, levels=20, colors='black', alpha=0.5, linewidths=0.5)
 
         plt.xlabel(f"{gene1_name} Abundance")
         plt.ylabel(f"{gene2_name} Abundance")
@@ -624,53 +725,91 @@ class ModelDiagnostics:
 
 
 def example_usage() -> Dict[str, object]:
+    # Set up a moderately stressful environment
     env = Microenvironment(hypoxia=0.6, nutrient_limitation=0.4)
     df = CancerRLTOModel.demo_dataset()
     model = CancerRLTOModel.from_dataframe(df, microenvironment=env)
 
-    # 1. Test Gene Level Optimization
-    print("Optimizing MYC abundance...")
-    myc_opt = model.optimize_gene_abundance(model.genes[0], n_samples=5000)
+    # =========================================================
+    # 1. TEST ALL EDGE CASES (Gene-Level Optimization)
+    # =========================================================
+    print("\n=== 1. OPTIMIZING ALL GENES (Checking Edge Cases) ===")
+    opt_df = model.optimize_all()
 
-    # 2. Test Intervention
-    print("Optimizing KRAS inhibition...")
-    opt_inhibition, residual_fitness = model.optimize_inhibition("KRAS", n_samples=5000)
-
-    # 3. Test Global Optimization
-    print("Optimizing global tumor state...")
-    opt_vector, best_global_fitness = model.optimize_global(n_samples=3000)
+    # Print a clean summary table so you can see the baseline vs optimal shift for every case
+    summary_cols = ["gene", "baseline_abundance", "optimal_abundance", "optimal_net_fitness"]
+    print(opt_df[summary_cols].to_string(index=False))
 
     # =========================================================
-    # 4. Run Mathematical Diagnostics & Plotting
+    # 2. GLOBAL & INTERVENTION TESTING
     # =========================================================
-    print("\n--- Running Model Diagnostics ---")
+    print("\n=== 2. GLOBAL TUMOR STATE OPTIMIZATION ===")
+    opt_vector, best_global_fitness = model.optimize_global()
+    print(f"Max achievable global fitness (with resource limits): {best_global_fitness:.4f}")
+
+    print("\n=== 3. INTERVENTION TESTING ===")
+    # Let's see what happens if we target the TOXIC_DRIVER
+    opt_inhibition, residual_fitness = model.optimize_inhibition("TOXIC_DRIVER")
+    print(f"Optimal inhibition for TOXIC_DRIVER: {opt_inhibition:.4f}")
+
+    # =========================================================
+    # 4. EXHAUSTIVE MATHEMATICAL DIAGNOSTICS & PLOTTING
+    # =========================================================
+    print("\n=== 4. RUNNING EXHAUSTIVE DIAGNOSTICS ===")
+    import os
+    os.makedirs("diagnostic_plots", exist_ok=True)
+
     diag = ModelDiagnostics(model)
 
-    print("Generating Component Decomposition (Close the window to continue)...")
-    diag.plot_component_decomposition("MYC", n_samples=3000)
-    plt.show()
+    # 1. Generate all single-gene plots
+    for g in model.genes:
+        name = g.gene
+        print(f"Generating plots for {name}...")
 
-    print("Generating Noise Stability Check (Close the window to continue)...")
-    diag.plot_noise_stability("MYC", n_samples=3000)
-    plt.show()
+        diag.plot_component_decomposition(name).savefig(f"diagnostic_plots/{name}_component.png")
+        plt.close()
 
-    print("Generating Convergence Check (Close the window to continue)...")
-    diag.plot_convergence_check("MYC", n_samples=2000)
-    plt.show()
+        diag.plot_noise_stability(name).savefig(f"diagnostic_plots/{name}_noise.png")
+        plt.close()
 
-    print("Generating Bivariate Landscape (Close the window to continue)...")
-    diag.plot_bivariate_landscape("MYC", "KRAS", n_samples=1500)
-    plt.show()
+        diag.plot_convergence_check(name).savefig(f"diagnostic_plots/{name}_convergence.png")
+        plt.close()
 
-    print("Generating Sensitivity Profile (Close the window to finish)...")
-    diag.plot_sensitivity_profile("MYC", param_name="toxicity_global")
-    plt.show()
+        diag.plot_sensitivity_profile(name, param_name="toxicity_global").savefig(
+            f"diagnostic_plots/{name}_sensitivity.png")
+        plt.close()
+
+    # 2. Generate specific bivariate landscapes
+    print("Generating Bivariate Landscapes...")
+    diag.plot_bivariate_landscape("MYC", "KRAS").savefig("diagnostic_plots/bivariate_MYC_KRAS.png")
+    plt.close()
+
+    diag.plot_bivariate_landscape("CHAOS_GENE", "HOUSEKEEPER").savefig(
+        "diagnostic_plots/bivariate_CHAOS_HOUSEKEEPER.png")
+    plt.close()
+
+    diag.plot_bivariate_landscape("PASSENGER", "MAGIC_BULLET").savefig("diagnostic_plots/bivariate_PASSENGER_MAGIC.png")
+    plt.close()
+
+    diag.plot_bivariate_landscape("MAGIC_BULLET", "RARE_VAR").savefig("diagnostic_plots/bivariate_MAGIC_RARE.png")
+    plt.close()
+
+    diag.plot_bivariate_landscape("TOXIC_DRIVER", "STRUCTURAL").savefig(
+        "diagnostic_plots/bivariate_TOXIC_STRUCTURAL.png")
+    plt.close()
+
+    print("All plots saved to the 'diagnostic_plots' directory!")
+
     # =========================================================
+    # Extract the core columns from our optimization dataframe and convert to a list of dictionaries
+    all_gene_results = opt_df[
+        ["gene", "baseline_abundance", "optimal_abundance", "optimal_net_fitness"]
+    ].to_dict(orient="records")
 
     return {
-        "MYC_optimal_abundance": myc_opt["optimal_abundance"],
-        "KRAS_optimal_inhibition": opt_inhibition,
-        "Best_global_fitness": best_global_fitness
+        "Best_global_fitness": best_global_fitness,
+        "Optimal_Inhibition_Target": opt_inhibition,
+        "All_Genes_Optimization": all_gene_results
     }
 
 
