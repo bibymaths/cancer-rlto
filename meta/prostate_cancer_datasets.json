@@ -1,0 +1,727 @@
+{
+  "cancer_type": "Prostate Cancer",
+  "datasets": [
+    {
+      "dataset_name": "TCGA-PRAD RNA-Seq (gene-level)",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "RNA-Seq (bulk)",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 497,
+      "data_level": "Processed counts + raw (Level 3)",
+      "matched_multiomics": true,
+      "notes": "Gene expression counts for 497 prostate adenocarcinoma cases; part of TCGA multi-omics with matched clinical, DNA, CNV, methylation and RPPA data",
+      "model_parameters": [
+        "baseline_abundance",
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "TCGA-PRAD miRNA-Seq",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "miRNA-Seq",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 494,
+      "data_level": "Processed (RPM counts)",
+      "matched_multiomics": true,
+      "notes": "miRNA expression for 494 cases; complements gene expression and other omics data",
+      "model_parameters": [
+        "baseline_abundance"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "TCGA-PRAD DNA methylation",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "DNA methylation (Illumina 450K)",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 498,
+      "data_level": "Beta values (Level 3)",
+      "matched_multiomics": true,
+      "notes": "CpG-site and gene-level methylation for 498 cases",
+      "model_parameters": [
+        "regulatory_control"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "TCGA-PRAD Copy Number Variation",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Somatic Copy Number Alteration (SCNA)",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 499,
+      "data_level": "Segment-level CNV (Level 3)",
+      "matched_multiomics": true,
+      "notes": "High-level and gene-level copy number data for 499 cases",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "TCGA-PRAD Whole-Exome Sequencing",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Somatic mutation (WXS)",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 498,
+      "data_level": "MAF/VCF (Level 3)",
+      "matched_multiomics": true,
+      "notes": "Somatic SNV and INDEL calls for 498 cases using exome sequencing; matched normal tissue",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "TCGA-PRAD Whole-Genome Sequencing",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Somatic mutation (WGS)",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 414,
+      "data_level": "Raw and processed WGS (Level 2/3)",
+      "matched_multiomics": true,
+      "notes": "WGS data for 414 prostate cancers providing structural variants and coverage for copy-number analysis",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "TCGA-PRAD Proteomics (RPPA)",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Proteomics (RPPA)",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 352,
+      "data_level": "Protein abundance (relative)",
+      "matched_multiomics": true,
+      "notes": "RPPA data for 352 cases covering ~200 proteins; complements gene expression and genomic data",
+      "model_parameters": [
+        "baseline_abundance"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "TCGA-PRAD ATAC-Seq",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Chromatin accessibility (ATAC-Seq)",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 26,
+      "data_level": "Peak calls and raw counts",
+      "matched_multiomics": true,
+      "notes": "ATAC-Seq on 26 prostate tumors for chromatin accessibility profiles",
+      "model_parameters": [
+        "regulatory_control"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "TCGA-PRAD Clinical & Phenotype",
+      "source_database": "TCGA/GDC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Clinical/Phenotype",
+      "accession_id": "TCGA-PRAD",
+      "download_url": "https://portal.gdc.cancer.gov/projects/TCGA-PRAD",
+      "sample_size": 500,
+      "data_level": "Clinical tables and survival data",
+      "matched_multiomics": true,
+      "notes": "Clinical characteristics, treatments, and outcomes for 500 prostate cancer patients; used for survival analyses",
+      "model_parameters": [
+        "fitness_output"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "TCGA-PRAD Imaging (TCIA)",
+      "source_database": "TCIA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Imaging (Radiology & Histopathology)",
+      "accession_id": "TCIA-TCGA-PRAD",
+      "download_url": "https://www.cancerimagingarchive.net/collections/",
+      "sample_size": 469,
+      "data_level": "DICOM radiology files & digitized slides",
+      "matched_multiomics": true,
+      "notes": "Imaging data for 469 cases including CT, MRI and PET scans; 1,172 SVS slides and 16,790 imaging files total, enabling spatial analysis",
+      "model_parameters": [
+        "fitness_output",
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "Single-patient prostate spatial transcriptomics",
+      "source_database": "EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Spatial transcriptomics",
+      "accession_id": "EGAD00001007921",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001007921",
+      "sample_size": 2,
+      "data_level": "BAM & counts",
+      "matched_multiomics": false,
+      "notes": "Visium spatial transcriptomics from two tissue sections of a single untreated prostate cancer patient",
+      "model_parameters": [
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "CRUK-ICGC Prostatectomy batches 4-6 WGS",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Whole Genome Sequencing",
+      "accession_id": "EGAD00001003225",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001003225",
+      "sample_size": 221,
+      "data_level": "BAM/FASTQ",
+      "matched_multiomics": true,
+      "notes": "Batch 4-6 WGS from 111 men (221 samples) exploring multifocal prostate tumors",
+      "model_parameters": [
+        "genetic_drivers",
+        "regulatory_control"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "ICGC WGS 51 tumors (10 patients)",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Whole Genome Sequencing",
+      "accession_id": "EGAD00001000891",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001000891",
+      "sample_size": 62,
+      "data_level": "BAM/FASTQ",
+      "matched_multiomics": true,
+      "notes": "WGS sequencing of 51 tumors and matched normals from 10 prostate cancer patients (62 samples total) to study subclonal architecture",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "ICGC WGS 20 men primary tumors",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Whole Genome Sequencing",
+      "accession_id": "EGAD00001000892",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001000892",
+      "sample_size": 40,
+      "data_level": "BAM/FASTQ",
+      "matched_multiomics": true,
+      "notes": "WGS of primary prostate tumors and matched blood from 20 patients (40 samples)",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "ICGC WGS pelvic lymph node metastases",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Whole Genome Sequencing",
+      "accession_id": "EGAD00001002002",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001002002",
+      "sample_size": 20,
+      "data_level": "BAM/FASTQ",
+      "matched_multiomics": true,
+      "notes": "Whole genome sequencing of pelvic lymph node metastases with matched blood from 10 prostate cancer patients (20 samples)",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "ICGC Normal prostatectomy WGS",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Whole Genome Sequencing",
+      "accession_id": "EGAD00001004125",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001004125",
+      "sample_size": 71,
+      "data_level": "BAM/FASTQ",
+      "matched_multiomics": true,
+      "notes": "Normal prostate tissue WGS from 30 prostate cancer patients and 7 non-cancer individuals (71 samples)",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "ICGC multi-region WGS 3 patients",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Whole Genome Sequencing",
+      "accession_id": "EGAD00001000689",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001000689",
+      "sample_size": 18,
+      "data_level": "BAM/FASTQ",
+      "matched_multiomics": true,
+      "notes": "Deep WGS of multiple tumor and normal samples from three men (18 files)",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "ICGC SNP6 genotype data",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Genotyping / SNP array",
+      "accession_id": "EGAD00010000498",
+      "download_url": "https://ega-archive.org/datasets/EGAD00010000498",
+      "sample_size": 18,
+      "data_level": "Raw SNP calls",
+      "matched_multiomics": true,
+      "notes": "Affymetrix SNP6 genotyping data for 18 prostate cancer samples; allows CNV estimation",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "CRUK-ICGC DNA methylation sequencing",
+      "source_database": "ICGC/EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "DNA methylation (capture sequencing)",
+      "accession_id": "EGAD00001010184",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001010184",
+      "sample_size": 376,
+      "data_level": "BAM & coverage tables",
+      "matched_multiomics": true,
+      "notes": "Capture-based DNA methylation sequencing for 376 samples from 188 matched tumor-control pairs; extends ICGC cohort",
+      "model_parameters": [
+        "regulatory_control"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "SU2C mCRPC RNA-Seq",
+      "source_database": "SU2C/PCF via EGA",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "RNA-Seq (bulk)",
+      "accession_id": "EGAD00001008991",
+      "download_url": "https://ega-archive.org/datasets/EGAD00001008991",
+      "sample_size": 118,
+      "data_level": "FASTQ/BAM",
+      "matched_multiomics": false,
+      "notes": "RNA-Seq of metastatic castration-resistant prostate cancer biopsies from 118 samples including 14 paired longitudinal samples",
+      "model_parameters": [
+        "baseline_abundance",
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "SU2C metastatic WES (Cell 2015)",
+      "source_database": "SU2C/PCF via cBioPortal",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Whole-exome sequencing",
+      "accession_id": "prad_su2c_2015",
+      "download_url": "https://www.cbioportal.org/study/summary?id=prad_su2c_2015",
+      "sample_size": 300,
+      "data_level": "MAF/VCF",
+      "matched_multiomics": true,
+      "notes": "Whole-exome sequencing of 150 metastatic prostate cancer tumor/normal pairs from the SU2C/PCF Dream Team",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "mCRPC integrative genomics (PNAS 2019)",
+      "source_database": "SU2C/PCF via cBioPortal",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Genomics & Transcriptomics",
+      "accession_id": "prad_su2c_2019",
+      "download_url": "https://www.cbioportal.org/study/summary?id=prad_su2c_2019",
+      "sample_size": 429,
+      "data_level": "MAF/VCF + RNA counts",
+      "matched_multiomics": true,
+      "notes": "Comprehensive genomic and transcriptomic analysis of 429 metastatic castration-resistant prostate cancer patients published in PNAS 2019",
+      "model_parameters": [
+        "genetic_drivers",
+        "baseline_abundance"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "GSE147250 RNA-Seq (TP53/RB1 loss)",
+      "source_database": "GEO",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "RNA-Seq (bulk)",
+      "accession_id": "GSE147250",
+      "download_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE147250",
+      "sample_size": 162,
+      "data_level": "Counts and FPKM",
+      "matched_multiomics": false,
+      "notes": "RNA-Seq of prostate cancer cell lines and metastatic tumors exploring TP53/RB1 loss; 162 samples including cell line replicates",
+      "model_parameters": [
+        "baseline_abundance",
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "GSE80609 RNA-Seq (castration-resistant signatures)",
+      "source_database": "GEO",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "RNA-Seq (bulk)",
+      "accession_id": "GSE80609",
+      "download_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE80609",
+      "sample_size": 45,
+      "data_level": "Counts and FPKM",
+      "matched_multiomics": false,
+      "notes": "RNA-Seq profiling of benign, primary, advanced and castration-resistant prostate cancer tissues (45 samples)",
+      "model_parameters": [
+        "baseline_abundance",
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "GSE158593 RNA-Seq (NE vs AdCa)",
+      "source_database": "GEO",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "RNA-Seq (bulk)",
+      "accession_id": "GSE158593",
+      "download_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE158593",
+      "sample_size": 48,
+      "data_level": "Counts",
+      "matched_multiomics": false,
+      "notes": "RNA-Seq of 48 LuCaP patient-derived xenograft tumors (15 neuroendocrine vs 33 adenocarcinoma) for NE/AdCa phenotype characterization",
+      "model_parameters": [
+        "baseline_abundance",
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "PXD013422 tissue proteomics",
+      "source_database": "PRIDE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Proteomics (LC-MS/MS)",
+      "accession_id": "PXD013422",
+      "download_url": "https://www.ebi.ac.uk/pride/archive/projects/PXD013422",
+      "sample_size": null,
+      "data_level": "Raw mass spectra & quantification",
+      "matched_multiomics": false,
+      "notes": "Mass spectrometry-based proteomics of prostate cancer tissues; identifies ~1,904 proteins; sample count not specified but includes multiple stages (T2, T3, metastatic)",
+      "model_parameters": [
+        "baseline_abundance",
+        "overexpression_burden"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "PXD022005 Lysine succinylation",
+      "source_database": "PRIDE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Proteomics (succinylome)",
+      "accession_id": "PXD022005",
+      "download_url": "https://www.ebi.ac.uk/pride/archive/projects/PXD022005",
+      "sample_size": null,
+      "data_level": "Raw mass spectra",
+      "matched_multiomics": false,
+      "notes": "Quantitative succinylome analysis of prostate epithelial cells and cell cultures exploring SIRT5-mediated modifications; sample count not specified",
+      "model_parameters": [
+        "baseline_abundance",
+        "regulatory_control",
+        "overexpression_burden"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "PXD028651 Serum proteomics",
+      "source_database": "PRIDE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Proteomics (SWATH-MS)",
+      "accession_id": "PXD028651",
+      "download_url": "https://www.ebi.ac.uk/pride/archive/projects/PXD028651",
+      "sample_size": null,
+      "data_level": "Raw SWATH-MS spectra",
+      "matched_multiomics": false,
+      "notes": "SWATH-MS proteomics of blood samples from prostate cancer patients and healthy individuals; thousands of peptides; sample numbers not specified",
+      "model_parameters": [
+        "baseline_abundance",
+        "overexpression_burden"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "LuCaP PDX proteome & phosphoproteome",
+      "source_database": "MassIVE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Proteomics & phosphoproteomics",
+      "accession_id": "MSV000092139",
+      "download_url": "https://massive.ucsd.edu/MSV000092139",
+      "sample_size": 48,
+      "data_level": "Raw MS/MS and quantified peptides",
+      "matched_multiomics": false,
+      "notes": "Proteome and phosphoproteome profiling of 48 LuCaP patient-derived xenograft tumors (15 neuroendocrine vs 33 adenocarcinoma) with 94k peptides and 9.7k phosphopeptides",
+      "model_parameters": [
+        "baseline_abundance",
+        "regulatory_control",
+        "overexpression_burden"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "DepMap CRISPR gene dependency",
+      "source_database": "DepMap",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Functional dependency (CRISPR)",
+      "accession_id": "DepMap 24Q2",
+      "download_url": "https://depmap.org/portal/download/",
+      "sample_size": 1320,
+      "data_level": "Gene effect scores (processed)",
+      "matched_multiomics": false,
+      "notes": "CRISPR-Cas9 gene knockout screens across >1,320 cancer cell lines including prostate lines (e.g., LNCaP, PC3, DU145) to measure gene essentiality",
+      "model_parameters": [
+        "functional_threshold",
+        "fitness_output"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "DepMap RNAi gene dependency (DEMETER2)",
+      "source_database": "DepMap",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Functional dependency (RNAi)",
+      "accession_id": "DEMETER2",
+      "download_url": "https://depmap.org/portal/download/",
+      "sample_size": 712,
+      "data_level": "Gene effect scores",
+      "matched_multiomics": false,
+      "notes": "RNAi knockdown screens across ~700 cancer cell lines measuring gene dependency",
+      "model_parameters": [
+        "functional_threshold",
+        "fitness_output"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "Project SCORE CRISPR dependency",
+      "source_database": "Sanger / Project SCORE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Functional dependency (CRISPR)",
+      "accession_id": "ProjectSCORE",
+      "download_url": "https://score.depmap.sanger.ac.uk/",
+      "sample_size": 324,
+      "data_level": "Gene dependency scores",
+      "matched_multiomics": false,
+      "notes": "Genome-wide CRISPR-Cas9 screens performed by the Sanger Institute across ~324 cancer cell lines including prostate lines",
+      "model_parameters": [
+        "functional_threshold",
+        "fitness_output"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "GDSC drug sensitivity",
+      "source_database": "GDSC",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Drug response (viability)",
+      "accession_id": "GDSC1/GDSC2",
+      "download_url": "https://www.cancerrxgene.org/",
+      "sample_size": 1000,
+      "data_level": "IC50/area-under-curve",
+      "matched_multiomics": false,
+      "notes": "Drug screening across ~1,000 cell lines for 397 unique compounds; includes several prostate cell lines with viability data",
+      "model_parameters": [
+        "fitness_output",
+        "functional_threshold"
+      ],
+      "confidence_score": "High"
+    },
+    {
+      "dataset_name": "CCLE mRNA expression for prostate lines",
+      "source_database": "CCLE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "RNA-Seq (cell lines)",
+      "accession_id": "CCLE_Expression",
+      "download_url": "https://depmap.org/portal/download/",
+      "sample_size": 8,
+      "data_level": "TPM/FPKM counts",
+      "matched_multiomics": true,
+      "notes": "mRNA expression for 8 prostate cancer cell lines (LNCaP, 22Rv1, PC3, DU145, etc.) from CCLE",
+      "model_parameters": [
+        "baseline_abundance",
+        "noise_heterogeneity"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "CCLE miRNA expression",
+      "source_database": "CCLE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "miRNA expression (cell lines)",
+      "accession_id": "CCLE_miRNA",
+      "download_url": "https://depmap.org/portal/download/",
+      "sample_size": 7,
+      "data_level": "Counts",
+      "matched_multiomics": true,
+      "notes": "miRNA expression data for 7 prostate cancer cell lines",
+      "model_parameters": [
+        "baseline_abundance"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "CCLE copy number",
+      "source_database": "CCLE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Copy number (cell lines)",
+      "accession_id": "CCLE_CNV",
+      "download_url": "https://depmap.org/portal/download/",
+      "sample_size": 8,
+      "data_level": "Log2 copy number ratios",
+      "matched_multiomics": true,
+      "notes": "Copy number profiles for 8 prostate cancer cell lines from CCLE",
+      "model_parameters": [
+        "genetic_drivers"
+      ],
+      "confidence_score": "Medium"
+    },
+    {
+      "dataset_name": "CCLE DNA methylation",
+      "source_database": "CCLE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "DNA methylation (cell lines)",
+      "accession_id": "CCLE_Methylation",
+      "download_url": "https://depmap.org/portal/download/",
+      "sample_size": 6,
+      "data_level": "Beta values",
+      "matched_multiomics": true,
+      "notes": "Infinium 450K methylation profiles for 6 prostate cancer cell lines",
+      "model_parameters": [
+        "regulatory_control"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "CCLE RPPA proteomics",
+      "source_database": "CCLE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Proteomics (RPPA)",
+      "accession_id": "CCLE_RPPA",
+      "download_url": "https://depmap.org/portal/download/",
+      "sample_size": 7,
+      "data_level": "Relative protein abundance",
+      "matched_multiomics": true,
+      "notes": "RPPA profiling for 7 prostate cancer cell lines from CCLE",
+      "model_parameters": [
+        "baseline_abundance"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "ENCODE LNCaP ATAC-Seq and ChIP-Seq",
+      "source_database": "ENCODE",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "ATAC-Seq & ChIP-Seq",
+      "accession_id": "LNCaP datasets",
+      "download_url": "https://www.encodeproject.org/",
+      "sample_size": 5,
+      "data_level": "Aligned reads & peak calls",
+      "matched_multiomics": false,
+      "notes": "Chromatin accessibility (ATAC-Seq) and transcription factor ChIP-Seq profiles of the LNCaP prostate cancer cell line; includes AR and histone marks",
+      "model_parameters": [
+        "regulatory_control"
+      ],
+      "confidence_score": "Low"
+    },
+    {
+      "dataset_name": "Roadmap Epigenomics prostate tissue",
+      "source_database": "Roadmap Epigenomics",
+      "cancer_type": "Prostate Cancer",
+      "data_modality": "Histone modification & DNA methylation",
+      "accession_id": "Roadmap E091/E092",
+      "download_url": "https://egg2.wustl.edu/roadmap/data/byDataType/",
+      "sample_size": 2,
+      "data_level": "Signal tracks & peak calls",
+      "matched_multiomics": false,
+      "notes": "Epigenomic maps (H3K4me3, H3K27ac, etc.) and DNA methylation for normal prostate tissues (two donors)",
+      "model_parameters": [
+        "regulatory_control"
+      ],
+      "confidence_score": "Low"
+    }
+  ],
+  "harmonization": {
+    "harmonization_keys": [
+      "TCGA barcode (e.g., TCGA-XX-YYYY)",
+      "DepMap cell line ID (e.g., ACH-000312)",
+      "cBioPortal patient/sample IDs",
+      "CCLE cell line names",
+      "Gene identifiers (HGNC symbols, Ensembl IDs)"
+    ],
+    "join_strategy": "Use inner joins on shared sample identifiers across matched datasets (e.g., TCGA barcodes to link RNA, CNV, mutation, methylation and RPPA data); for cell-line data, join by DepMap/CCLE IDs; for gene-level integration, use gene symbols/Ensembl IDs. When integrating patient cohorts from distinct studies (e.g., TCGA vs SU2C), perform outer joins on gene-level features and align gene sets; matching clinical data may require manual mapping.",
+    "integration_challenges": "Differences in sequencing platforms, data normalization methods, and varying sample sizes may complicate integration. Some datasets are controlled-access requiring application; cross-study heterogeneity and batch effects need correction. Limited overlap between patient cohorts (TCGA vs ICGC vs SU2C) reduces direct sample matching; therefore integration relies on gene-level summarisation rather than sample-level linkage."
+  },
+  "prioritized_datasets": [
+    {
+      "dataset_name": "TCGA-PRAD multi-omics (RNA, DNA, CNV, methylation, RPPA)",
+      "rank": 1,
+      "justification": "Comprehensive, publicly accessible multi-omics resource with matched clinical data for ~500 prostate cancer patients; provides baseline abundance, genetic drivers, regulatory control and protein abundance for model calibration."
+    },
+    {
+      "dataset_name": "DepMap CRISPR gene dependency",
+      "rank": 2,
+      "justification": "Large-scale functional dependency data across >1,320 cell lines including multiple prostate lines; essential to define functional thresholds for gene fitness in the model."
+    },
+    {
+      "dataset_name": "GDSC drug sensitivity",
+      "rank": 3,
+      "justification": "Provides viability and drug response curves for ~1,000 cell lines; helps calibrate fitness outputs and evaluate overexpression burden when combined with gene expression."
+    },
+    {
+      "dataset_name": "CCLE multi-omics (expression, CNV, methylation, RPPA)",
+      "rank": 4,
+      "justification": "Multi-omic profiles for prostate cell lines that align with DepMap IDs; enables linking baseline abundance to functional dependency and drug response data."
+    },
+    {
+      "dataset_name": "CRUK-ICGC DNA methylation sequencing (EGAD00001010184)",
+      "rank": 5,
+      "justification": "Large-scale matched tumor-control methylome dataset (376 samples) capturing regulatory control; complements TCGA methylation and provides cross-cohort validation."
+    },
+    {
+      "dataset_name": "ICGC WGS prostatectomy batches 4-6 (EGAD00001003225)",
+      "rank": 6,
+      "justification": "High-depth whole genome sequencing for 111 patients enabling identification of genetic drivers and structural variation beyond TCGA."
+    },
+    {
+      "dataset_name": "SU2C mCRPC RNA-Seq (EGAD00001008991)",
+      "rank": 7,
+      "justification": "Provides expression profiles from metastatic castration-resistant prostate cancer biopsies; important for modelling noise/heterogeneity and validating baseline abundance in advanced disease."
+    },
+    {
+      "dataset_name": "LuCaP PDX proteome & phosphoproteome (MSV000092139)",
+      "rank": 8,
+      "justification": "Mass-spectrometry proteomics and phosphoproteomics for 48 PDX tumors; offers high-resolution protein abundance and phosphorylation data to refine baseline abundance and regulatory control."
+    },
+    {
+      "dataset_name": "PXD013422 tissue proteomics",
+      "rank": 9,
+      "justification": "Unbiased tissue proteomics dataset identifying ~1,904 proteins; extends protein-level baseline abundance beyond RPPA."
+    },
+    {
+      "dataset_name": "GSE147250 RNA-Seq",
+      "rank": 10,
+      "justification": "Public RNA-Seq dataset exploring TP53/RB1 loss in prostate cancer; useful for calibrating baseline abundance and evaluating noise in cell lines and metastatic samples."
+    }
+  ]
+}

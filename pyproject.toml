@@ -1,0 +1,12 @@
+[project]
+name = "cancer-rlto"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "pandas>=3.0.1",
+]
+authors = [
+    { name="Abhinav Mishra", email="mishraabhinav36@gmail.com" },
+]
