@@ -6,6 +6,7 @@ requires-python = ">=3.12"
 dependencies = [
     "matplotlib>=3.10.8",
     "pandas>=3.0.1",
+    "scipy>=1.17.1",
 ]
 authors = [
     { name="Abhinav Mishra", email="mishraabhinav36@gmail.com" },
