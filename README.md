@@ -34,13 +34,13 @@ Protein abundance is not deterministic. It follows a **Gamma distribution**:
 * Shape: governed by transcriptional burstiness
 * Scale: determined by mean abundance
 
-To remain viable, the protein level ( X ) must exceed a critical threshold ( \tau_i ).
+To remain viable, the protein level ($X$) must exceed a critical threshold ($\tau_i$).
 
 The survival probability is:
 
-[
+$$
 P(X \ge \tau_i)
-]
+$$
 
 This is computed analytically via the **regularized upper incomplete gamma function** (`gammaincc`), eliminating
 stochastic noise.
@@ -51,17 +51,17 @@ stochastic noise.
 
 #### Net Gene Fitness
 
-[
+$$
 F_i(x_i) = R_i(x_i) - B_i(x_i) - T_i(x_i)
-]
+$$
 
 ---
 
 #### Robustness Benefit
 
-[
+$$
 R_i(x_i) = S \cdot E_i \cdot P(X \ge \tau_i)
-]
+$$
 
 * ( S ): global scaling factor
 * ( E_i ): essentiality
@@ -73,9 +73,9 @@ This term **plateaus** once survival probability approaches 1.
 
 #### Burden Cost
 
-[
+$$
 B_i(x_i) = c_b \cdot w_{b,i} \cdot x_i
-]
+$$
 
 * Linear scaling
 * Represents ATP and translational cost
@@ -84,9 +84,9 @@ B_i(x_i) = c_b \cdot w_{b,i} \cdot x_i
 
 #### Toxicity Cost
 
-[
+$$
 T_i(x_i) = c_t \cdot w_{t,i} \cdot x_i^{1.25}
-]
+$$
 
 * Superlinear penalty
 * Captures aggregation and oncogenic toxicity
@@ -95,9 +95,9 @@ T_i(x_i) = c_t \cdot w_{t,i} \cdot x_i^{1.25}
 
 ### Global Tumor Fitness
 
-[
+$$
 F_{global}(\mathbf{x}) = \frac{1}{N} \sum_{i=1}^{N} F_i(x_i) - \lambda \left( \frac{\sum x_i}{X_{baseline}} \right)^2
-]
+$$
 
 Interpretation:
 
@@ -155,9 +155,9 @@ Reason:
 
 With **no penalties**, fitness reduces to:
 
-[
+$$  
 F_i \approx R_i
-]
+$$
 
 Thus, optimizer pushes abundance to the **maximum allowed bound**.
 
@@ -181,9 +181,9 @@ Thus, optimizer pushes abundance to the **maximum allowed bound**.
 
 ### Explanation
 
-[
+$$
 R_i = 0 \Rightarrow F_i = -B_i - T_i
-]
+$$
 
 The optimizer collapses expression to **zero**.
 
@@ -213,9 +213,9 @@ High variance → wide Gamma distribution → high probability of falling below 
 
 To compensate:
 
-[
+$$
 x_i \uparrow \Rightarrow P(X \ge \tau_i) \uparrow
-]
+$$
 
 Optimizer drives **massive overexpression**.
 
@@ -243,9 +243,9 @@ Low variance → tight distribution.
 
 Thus:
 
-[
+$$
 P(X \ge \tau_i) \approx 1 \text{ even at low } x_i
-]
+$$
 
 Optimizer minimizes cost → **collapses abundance to threshold proximity**.
 
@@ -274,9 +274,9 @@ Optimizer minimizes cost → **collapses abundance to threshold proximity**.
 
 Toxicity term dominates:
 
-[
+$$
 T_i \sim x^{1.25}
-]
+$$
 
 Optimizer aggressively suppresses expression.
 
@@ -302,9 +302,9 @@ Optimizer aggressively suppresses expression.
 
 Linear penalty ensures:
 
-[
+$$
 \text{Optimal } x_i \approx \text{minimal viable threshold}
-]
+$$
 
 ### Plots
 
