@@ -1,0 +1,145 @@
+site_name: Cancer RLTO Model
+site_description: Production-grade documentation for a cancer-adapted RLTO-inspired Python model for robustness, burden, toxicity, optimization, and diagnostics.
+site_url: https://bibymaths.github.io/cancer-rlto/
+repo_url: https://github.com/bibymaths/cancer-rlto
+repo_name: bibymaths/cancer-rlto
+edit_uri: edit/main/docs/
+
+copyright: >
+  Copyright © 2026 Abhinav Mishra.
+
+theme:
+  name: material
+  language: en
+  logo: null
+  favicon: null
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - search.suggest
+    - search.highlight
+    - search.share
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/bibymaths
+  generator: false
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - def_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.keys
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.tilde
+  - pymdownx.mark
+  - pymdownx.arithmatex:
+      generic: true
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+      fallback_to_build_date: true
+  - mkdocstrings:
+      handlers:
+        python:
+          paths:
+            - .
+          options:
+            show_root_heading: true
+            show_root_full_path: false
+            heading_level: 2
+            docstring_style: google
+            show_signature_annotations: true
+            separate_signature: true
+            show_source: false
+            inherited_members: true
+            members_order: source
+            filters:
+              - "!^_"
+
+nav:
+  - Overview:
+      - Home: index.md
+      - Installation: installation.md
+      - Quickstart: quickstart.md
+      - Usage: usage.md
+      - Inputs: inputs.md
+      - Outputs: outputs.md
+  - Model:
+      - Methods and assumptions: methods.md
+      - Architecture: architecture.md
+  - Reference:
+      - API overview: api/index.md
+      - Core model API: api/model.md
+      - Diagnostics API: api/diagnostics.md
+  - Operations:
+      - FAQ: faq.md
+      - Troubleshooting: troubleshooting.md
+
+validation:
+  nav:
+    omitted_files: warn
+    not_found: warn
+    absolute_links: warn
+  links:
+    not_found: warn
+    anchors: warn
+    absolute_links: relative_to_docs
+
+watch:
+  - docs
+
+#strict: false

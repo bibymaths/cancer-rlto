@@ -1,0 +1,17 @@
+# Default owner for the entire repository
+* @bibymaths
+
+# Documentation and publishing
+/docs/ @bibymaths
+mkdocs.yml @bibymaths
+.github/workflows/ @bibymaths
+
+# Project metadata and governance
+pyproject.toml @bibymaths
+CITATION.cff @bibymaths
+NOTICE @bibymaths
+TERMS_OF_USE.md @bibymaths
+README.md @bibymaths
+
+# Core model
+rlto_model.py @bibymaths

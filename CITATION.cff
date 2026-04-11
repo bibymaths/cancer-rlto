@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: "Cancer RLTO Model"
+message: "If you use this software, please cite it using the metadata in this file."
+type: software
+authors:
+  - family-names: "Mishra"
+    given-names: "Abhinav"
+    email: "mishraabhinav36@gmail.com"
+repository-code: "https://github.com/bibymaths/cancer-rlto"
+url: "https://github.com/bibymaths/cancer-rlto"
+abstract: >-
+  Cancer-adapted RLTO-inspired model for deterministic robustness-load
+  trade-off analysis, gene-level optimization, tumor-level resource-constrained
+  optimization, intervention simulation, and diagnostic plotting.
+keywords:
+  - bioinformatics
+  - cancer systems biology
+  - optimization
+  - robustness
+  - mathematical modeling
+  - omics
+license: "Proprietary"
+version: "0.1.0"
+date-released: "2026-04-11"
+preferred-citation:
+  type: software
+  authors:
+    - family-names: "Mishra"
+      given-names: "Abhinav"
+      email: "mishraabhinav36@gmail.com"
+  title: "Cancer RLTO Model"
+  version: "0.1.0"
+  date-released: "2026-04-11"
+  url: "https://github.com/bibymaths/cancer-rlto"
