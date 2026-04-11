@@ -18,3 +18,7 @@
 .md-typeset code {
   word-break: break-word;
 }
+
+code, pre {
+  font-feature-settings: "liga" 1, "calt" 1;
+}

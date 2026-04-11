@@ -6,7 +6,7 @@ Install runtime dependencies first:
 
 ```bash
 uv sync
-````
+```
 
 ## Plots are not being written
 
