@@ -6,7 +6,8 @@ repo_name: bibymaths/cancer-rlto
 edit_uri: edit/main/docs/
 
 copyright: >
-  Copyright © 2026 Abhinav Mishra.
+  Code: MIT |
+  Docs: CC BY 4.0 © 2026 Abhinav Mishra
 
 theme:
   name: material
@@ -116,6 +117,7 @@ plugins:
             members_order: source
             filters:
               - "!^_"
+  - mike
 
 nav:
   - Overview:

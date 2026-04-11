@@ -81,7 +81,8 @@ That makes the current architecture well suited to:
 
 ## Plotting path
 
-`ModelDiagnostics` uses `matplotlib` and returns figure objects. The example workflow persists them to disk with `savefig()`.
+`ModelDiagnostics` uses `matplotlib` and returns figure objects. The example workflow persists them to disk with
+`savefig()`.
 
 ## What is not currently present
 

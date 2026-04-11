@@ -5,16 +5,15 @@
 [![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](#installation)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#license)
 
-Cancer-adapted RLTO-inspired model for deterministic robustness–load trade-off analysis, gene-level optimization, tumor-level resource-constrained optimization, intervention simulation, and diagnostic plotting.
+Cancer-adapted RLTO-inspired model for deterministic robustness–load trade-off analysis, gene-level optimization,
+tumor-level resource-constrained optimization, intervention simulation, and diagnostic plotting.
 
 --- 
 
 ## Install
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install numpy pandas scipy matplotlib
+uv sync
 ````
 
 --- 

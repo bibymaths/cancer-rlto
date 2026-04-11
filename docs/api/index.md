@@ -27,7 +27,8 @@ The focus is on the parts that are useful for:
 - simulating perturbations,
 - generating diagnostics.
 
-Low-value internals and helper details are intentionally not elevated beyond what `mkdocstrings` already renders for the public objects.
+Low-value internals and helper details are intentionally not elevated beyond what `mkdocstrings` already renders for the
+public objects.
 
 ## Import convention
 

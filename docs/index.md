@@ -1,6 +1,7 @@
 # Cancer RLTO Model
 
-A cancer-adapted RLTO-inspired Python model for deterministic analysis of robustness, burden, toxicity, optimization, and stress-test diagnostics.
+A cancer-adapted RLTO-inspired Python model for deterministic analysis of robustness, burden, toxicity, optimization,
+and stress-test diagnostics.
 
 ## What this project does
 
@@ -23,10 +24,12 @@ The implementation supports:
 
 ## Project status
 
-This documentation is generated from the current repository state and is intentionally aligned to the code rather than to narrative claims in older prose.
+This documentation is generated from the current repository state and is intentionally aligned to the code rather than
+to narrative claims in older prose.
 
 !!! note "Current repository shape"
-    The project currently looks like a script-oriented module rather than a packaged library. The documentation therefore emphasizes direct script execution and module import patterns.
+The project currently looks like a script-oriented module rather than a packaged library. The documentation therefore
+emphasizes direct script execution and module import patterns.
 
 ## Typical workflow
 
@@ -69,7 +72,7 @@ will:
 * optimize the built-in synthetic “Rogue’s Gallery” stress-test dataset,
 * and write diagnostic figures into `diagnostic_plots/`.
 
-See [Outputs](outputs.md) for the expected file structure. 
+See [Outputs](outputs.md) for the expected file structure.
 
 ## Feature summary
 

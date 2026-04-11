@@ -1,0 +1,54 @@
+{
+  "title": "Cancer RLTO Model",
+  "creators": [
+    {
+      "name": "Mishra, Abhinav",
+      "affiliation": "Independent / Bioinformatics Research",
+      "orcid": "0009-0005-3179-7408"
+    }
+  ],
+  "description": "Cancer-adapted RLTO-inspired model for deterministic robustness–load trade-off analysis in cancer systems biology. The framework models gene-level fitness as a balance between robustness, metabolic burden, and toxicity, and extends this to tumor-level optimization under global resource constraints. It supports analytical fitness evaluation, gene-level and global optimization, intervention simulation, and diagnostic visualization.",
+  "upload_type": "software",
+  "publication_type": "software",
+  "license": "MIT",
+  "keywords": [
+    "bioinformatics",
+    "cancer systems biology",
+    "mathematical modeling",
+    "optimization",
+    "robustness",
+    "omics",
+    "RLTO",
+    "systems biology",
+    "computational biology"
+  ],
+  "access_right": "open",
+  "language": "eng",
+  "version": "0.1.1",
+  "related_identifiers": [
+    {
+      "identifier": "10.1126/sciadv.adz9623",
+      "relation": "isDerivedFrom",
+      "scheme": "doi",
+      "resource_type": "publication"
+    }
+  ],
+  "references": [
+    "Choi, H. J., Lo, T. W., Cutler, K. J., Huang, D., Will, W. R., & Wiggins, P. A. (2026). Protein overabundance is driven by growth robustness. Science Advances, 12(12), eadz9623. https://doi.org/10.1126/sciadv.adz9623"
+  ],
+  "notes": "This implementation is a principled engineering adaptation of robustness–load trade-off (RLTO) concepts for cancer systems biology. It is not a direct reproduction of the full mathematical formalism of the referenced publication.",
+  "communities": [],
+  "grants": [],
+  "contributors": [],
+  "subjects": [
+    {
+      "term": "Computational Biology"
+    },
+    {
+      "term": "Systems Biology"
+    },
+    {
+      "term": "Cancer Research"
+    }
+  ]
+}

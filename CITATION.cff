@@ -1,17 +1,25 @@
 cff-version: 1.2.0
 title: "Cancer RLTO Model"
-message: "If you use this software, please cite it using the metadata in this file."
+message: >-
+  If you use this software, please cite it using the metadata below.
+  This work is inspired by prior research on robustness–load trade-offs in protein abundance.
+
 type: software
+
 authors:
   - family-names: "Mishra"
     given-names: "Abhinav"
     email: "mishraabhinav36@gmail.com"
+    orcid: "0009-0005-3179-7408"
+
 repository-code: "https://github.com/bibymaths/cancer-rlto"
 url: "https://github.com/bibymaths/cancer-rlto"
+
 abstract: >-
-  Cancer-adapted RLTO-inspired model for deterministic robustness-load
+  Cancer-adapted RLTO-inspired model for deterministic robustness–load
   trade-off analysis, gene-level optimization, tumor-level resource-constrained
   optimization, intervention simulation, and diagnostic plotting.
+
 keywords:
   - bioinformatics
   - cancer systems biology
@@ -19,16 +27,39 @@ keywords:
   - robustness
   - mathematical modeling
   - omics
-license: "Proprietary"
-version: "0.1.0"
+
+license: "MIT"
+version: "0.1.1"
 date-released: "2026-04-11"
+
+references:
+  - type: article
+    title: "Protein overabundance is driven by growth robustness"
+    authors:
+      - family-names: "Choi"
+        given-names: "H. James"
+      - family-names: "Lo"
+        given-names: "Teresa W."
+      - family-names: "Cutler"
+        given-names: "Kevin J."
+      - family-names: "Huang"
+        given-names: "Dean"
+      - family-names: "Will"
+        given-names: "William Ryan"
+      - family-names: "Wiggins"
+        given-names: "Paul A."
+    journal: "Science Advances"
+    year: 2026
+    doi: "10.1126/sciadv.adz9623"
+
 preferred-citation:
   type: software
   authors:
     - family-names: "Mishra"
       given-names: "Abhinav"
       email: "mishraabhinav36@gmail.com"
+      orcid: "0009-0005-3179-7408"
   title: "Cancer RLTO Model"
-  version: "0.1.0"
+  version: "0.1.1"
   date-released: "2026-04-11"
   url: "https://github.com/bibymaths/cancer-rlto"

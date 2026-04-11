@@ -104,7 +104,7 @@ diagnostic_plots/bivariate_TOXIC_STRUCTURAL.png
 ## Example result interpretation
 
 | Field                         | Interpretation                                               |
-| ----------------------------- | ------------------------------------------------------------ |
+|-------------------------------|--------------------------------------------------------------|
 | `overabundance > 1`           | mean abundance exceeds critical threshold                    |
 | high `robustness_probability` | abundance distribution remains above threshold more reliably |
 | high `burden_cost`            | production cost is materially penalizing                     |
@@ -131,4 +131,5 @@ The script entrypoint ends by printing a JSON payload similar to:
 ```
 
 !!! note
-    Exact values depend on the model configuration and dataset. The numeric example above reflects the current README narrative and should be treated as an expected pattern rather than a guaranteed regression fixture.
+Exact values depend on the model configuration and dataset. The numeric example above reflects the current README
+narrative and should be treated as an expected pattern rather than a guaranteed regression fixture.

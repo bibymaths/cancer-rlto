@@ -120,7 +120,9 @@ Then move to diagnostics only when you need to inspect model shape or optimizati
 
 * The main analytical fitness calculation is deterministic.
 * The model still initializes an RNG and exposes `sample_abundance()`.
-* The diagnostics API contains labels such as “noise stability”, but the current analytical implementation does not rely on Monte Carlo sampling for `net_gene_fitness()`.
+* The diagnostics API contains labels such as “noise stability”, but the current analytical implementation does not rely
+  on Monte Carlo sampling for `net_gene_fitness()`.
 
 !!! note
-    The `n_samples` parameter is preserved in several method signatures for compatibility, but the analytical path means it is largely not used by the core fitness calculation.
+The `n_samples` parameter is preserved in several method signatures for compatibility, but the analytical path means it
+is largely not used by the core fitness calculation.

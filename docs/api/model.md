@@ -37,7 +37,7 @@ model = CancerRLTOModel.from_dataframe(df, microenvironment=env)
 ### Methods you will use most often
 
 | Method                      | Purpose                                    |
-| --------------------------- | ------------------------------------------ |
+|-----------------------------|--------------------------------------------|
 | `evaluate()`                | rank the current gene set                  |
 | `optimize_gene_abundance()` | optimize one gene                          |
 | `optimize_all()`            | optimize all genes independently           |

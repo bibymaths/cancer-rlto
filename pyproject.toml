@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cancer-rlto"
-version = "0.1.0"
+version = "0.1.1"
 description = "Cancer-adapted RLTO-inspired model for deterministic robustness-load trade-off analysis, optimization, and diagnostic plotting."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -58,6 +58,7 @@ docs = [
   "pygments>=2.18",
   "pymdown-extensions>=10.8",
   "griffe>=0.49",
+  "mike>=2.0",
 ]
 
 [tool.hatch.build]

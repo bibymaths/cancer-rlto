@@ -12,7 +12,8 @@ At a high level:
 
 ## Deterministic analytical core
 
-The current code uses an analytical gamma survival function to compute the probability that abundance exceeds the critical threshold.
+The current code uses an analytical gamma survival function to compute the probability that abundance exceeds the
+critical threshold.
 
 That matters because it makes the main fitness calculation deterministic.
 
@@ -105,7 +106,8 @@ toxicity_cost ∝ toxicity_weight × (abundance / 1000)^1.25 / (1 + regulation_s
 
 ### Layer 2: global tumor optimization
 
-`optimize_global()` uses SLSQP over all genes jointly and subtracts a quadratic penalty on total abundance normalized by baseline total abundance.
+`optimize_global()` uses SLSQP over all genes jointly and subtracts a quadratic penalty on total abundance normalized by
+baseline total abundance.
 
 ### Layer 3: intervention optimization
 
@@ -115,8 +117,10 @@ toxicity_cost ∝ toxicity_weight × (abundance / 1000)^1.25 / (1 + regulation_s
 
 ## Important implementation note
 
-Several methods still accept an `n_samples` parameter, but `net_gene_fitness()` is now analytical and no longer depends on Monte Carlo sampling for the main calculation.
+Several methods still accept an `n_samples` parameter, but `net_gene_fitness()` is now analytical and no longer depends
+on Monte Carlo sampling for the main calculation.
 
 ## Scope and limits
 
-This implementation should be read as a practical engineering model, not a full formal recovery of any paper’s supplementary derivation.
+This implementation should be read as a practical engineering model, not a full formal recovery of any paper’s
+supplementary derivation.
