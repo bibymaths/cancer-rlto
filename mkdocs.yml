@@ -127,6 +127,7 @@ nav:
       - Usage: usage.md
       - Inputs: inputs.md
       - Outputs: outputs.md
+      - License: license.md
   - Model:
       - Methods and assumptions: methods.md
       - Architecture: architecture.md
