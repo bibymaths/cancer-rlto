@@ -4,7 +4,7 @@
 [![Release](https://img.shields.io/github/v/release/bibymaths/cancer-rlto?display_name=tag)](https://github.com/bibymaths/cancer-rlto/releases)
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](#installation)
 [![Docs CI](https://img.shields.io/github/actions/workflow/status/bibymaths/cancer-rlto/docs.yml?branch=main&label=docs)](https://github.com/bibymaths/cancer-rlto/actions/workflows/docs.yml)
-[![License](https://img.shields.io/badge/license-Needs%20confirmation-lightgrey)](#license)
+[![License](https://img.shields.io/badge/license-MIT-lightgrey)](#license)
 
 Cancer-adapted RLTO-inspired model for deterministic robustness–load trade-off analysis, gene-level optimization, tumor-level resource-constrained optimization, intervention simulation, and diagnostic plotting.
 

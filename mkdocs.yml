@@ -141,5 +141,3 @@ validation:
 
 watch:
   - docs
-
-#strict: false
